@@ -94,7 +94,9 @@ if not args.discovery:
     if config['discovery'] == True:
        config['discovery'] = True
     else: 
-       config['discovery'] = False
+      if config['discovery'] == False:
+         config['discovery'] = False
+      else: config['discovery'] = default_config['discovery']
             
 
 if not config['host']:
