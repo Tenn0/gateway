@@ -100,7 +100,7 @@ class gateway:
         if 'name' in pub_device:
           device['name'] = pub_device['name']
         else: 
-            device['name'] = "null"
+            device['name'] = pub_device_uuid
         device['state_topic'] = state_topic
         device['device'] = ha.device
         device['schema'] = "json"
