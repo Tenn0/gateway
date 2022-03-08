@@ -85,12 +85,11 @@ class gateway:
         else:
             logger.error(f"Failed to send message to topic {pub_topic}")
     
-    def publish_device_info(self, topic, pub_device):
+    def publish_device_info(self, topic, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         ha = homeassistant()
         device = {}
+        ##setup HA device
         pub_device = json.loads(pub_device)
-        print(pub_device)
-        print("hi")
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
@@ -106,10 +105,12 @@ class gateway:
         device['device'] = ha.device
         device['schema'] = "json"
         device['state_topic'] = state_topic
-        if 'steps' in pub_device:
+        if 'steps' in pub_device:  ## sensor states for Xaomi Mi Band
           msg = pub_device['steps']
-          self.publish(msg, state_topic) ## sensor states (hopefully)
-        attributes = {}
+          self.publish(msg, state_topic) 
+        
+        ##attributes
+        attributes = {}      
         attributes['rssi'] = pub_device['rssi']
         attributes['brand'] = pub_device['brand']
         attributes['id'] = pub_device['id']
@@ -118,10 +119,11 @@ class gateway:
         attributes = json.dumps(attributes)
         device['json_attr'] = attributes
         device['json_attr_t'] = attr_topic
-        self.publish(attributes, attr_topic)
+        self.publish(attributes, attr_topic) ##attributes
+        
+        
         payload = json.dumps(device)
         msg = payload
-        print(topic)
         self.publish(msg, config_topic) ##overall device
 
     async def ble_scan_loop(self):
@@ -171,7 +173,7 @@ def detection_callback(device, advertisement_data):
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
            print(data_json)
-           gw.publish_device_info(gw.pub_topic, data_json)
+           gw.publish_device_info(gw.pub_topic, data_json) ## publish sensor data to home assistant mqtt discovery
            
 
 
