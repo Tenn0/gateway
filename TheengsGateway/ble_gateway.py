@@ -126,8 +126,14 @@ def detection_callback(device, advertisement_data):
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
 
+def publish_device_info(topic, device):
+    topic = topic + ("/sensor/") + device.address.replace(':', '')
+    print(topic)
+    return 1;
+
 def run(arg):
     global gw
+    
     try:
         with open(arg) as config_file:
             config = json.load(config_file)
@@ -143,7 +149,7 @@ def run(arg):
     gw.time_between_scans = config.get("ble_time_between_scans", 0)
     gw.sub_topic = config.get("subscribe_topic", "gateway_sub")
     gw.pub_topic = config.get("publish_topic", "gateway_pub")
-
+    publish_device_info(device = "hi", topic=gw.pub_topic)
     log_level = config.get("log_level", "WARNING").upper()
     if log_level == "DEBUG":
         log_level = logging.DEBUG
