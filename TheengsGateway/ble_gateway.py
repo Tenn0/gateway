@@ -88,12 +88,17 @@ class gateway:
     def publish_device_info(self, topic, pub_device):
         ha = homeassistant()
         device = {}
-        pub_device_uuid = pub_device['id'].replace(":", "")
+        pub_device = json.loads(pub_device)
+        print(pub_device)
+        print("hi")
+        pub_device_uuid = pub_device['id']
+        pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
         topic = topic + "/" + pub_device_uuid
         state_topic = topic + "/state"
         config_topic = topic + "/config"
-        device['name'] = device['name']
+        if pub_device['name']:
+          device['name'] = pub_device['name']
         device['state_topic'] = state_topic
         device['device'] = ha.device
         device['schema'] = "json"
