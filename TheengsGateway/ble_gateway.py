@@ -97,6 +97,7 @@ class gateway:
         topic = topic + "/" + pub_device_uuid
         state_topic = topic + "/state"
         config_topic = topic + "/config"
+        attr_topic = topic + "/attributes"
         if 'name' in pub_device:
           device['name'] = pub_device['name']
         else: 
@@ -108,6 +109,14 @@ class gateway:
         if 'steps' in pub_device:
           msg = pub_device['steps']
           self.publish(msg, state_topic) ## sensor states (hopefully)
+        attributes = {}
+        attributes['rssi'] = pub_device['rssi']
+        attributes['brand'] = pub_device['brand']
+        attributes['id'] = pub_device['id']
+        attributes['model'] = pub_device['model']
+        attributes['model_id'] = pub_device['model_id']
+        attributes = json.dumps(attributes)
+        device['attributes'] = attributes
         payload = json.dumps(device)
         msg = payload
         print(topic)
