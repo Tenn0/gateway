@@ -22,10 +22,12 @@
 # python 3.6
 
 import asyncio
+from distutils.command.config import config
 import json
 import struct
 import sys
 import logging
+from typing_extensions import Self
 
 from bleak import BleakScanner
 from ._decoder import decodeBLE, getProperties, getAttribute
@@ -41,12 +43,13 @@ class homeassistant:
         self.device['manufacturer'] = "theengs"
 
 class gateway:
-    def __init__(self, broker, port, username, password):
+    def __init__(self, broker, port, username, password, discovery):
         self.broker = broker
         self.port = port
         self.username = username
         self.password = password
         self.stopped = False
+        self.discovery = discovery
 
     def connect_mqtt(self):
         def on_connect(client, userdata, flags, rc):
@@ -187,7 +190,7 @@ def run(arg):
         raise SystemExit(f"Invalid File: {sys.argv[1]}")
 
     try:
-        gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"])
+        gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
     except:
         raise SystemExit(f"Missing or invalid MQTT host parameters")
 
@@ -195,8 +198,6 @@ def run(arg):
     gw.time_between_scans = config.get("ble_time_between_scans", 0)
     gw.sub_topic = config.get("subscribe_topic", "gateway_sub")
     gw.pub_topic = config.get("publish_topic", "gateway_pub")
-    if config.get("discovery") == True:
-        gw.discovery_topic = config.get("discovery_topic")
     log_level = config.get("log_level", "WARNING").upper()
     if log_level == "DEBUG":
         log_level = logging.DEBUG
@@ -213,7 +214,9 @@ def run(arg):
 
     logging.basicConfig()
     logger.setLevel(log_level)
-
+    if config.get("discovery") == True:
+      gw.discovery_topic = config.get("discovery_topic")
+      logger.info("HA Discovery activated")
     loop = asyncio.get_event_loop()
     t = Thread(target=loop.run_forever, daemon=True)
     t.start()
