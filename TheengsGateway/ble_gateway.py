@@ -117,6 +117,7 @@ class gateway:
         attributes['model_id'] = pub_device['model_id']
         attributes = json.dumps(attributes)
         device['json_attr'] = attributes
+        device['json_attr_t'] = attr_topic
         self.publish(attributes, attr_topic)
         payload = json.dumps(device)
         msg = payload
