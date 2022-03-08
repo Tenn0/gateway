@@ -52,7 +52,8 @@ parser.add_argument('-sd', '--scan_duration', dest='scan_dur', type=int, help="B
 parser.add_argument('-tb', '--time_between', dest='time_between', type=int, help="Seconds to wait between scans")
 parser.add_argument('-ll', '--log_level', dest='log_level', type=str, help="TheengsGateway log level",
                     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
-parser.add_argument('-D', '--discovery-topic', dest='discovery', type=str, help="MQTT Discovery Topic for Home Assistant. If not used, Discovery is disabled")
+parser.add_argument('-Dt', '--discovery-topic', dest='discovery_topic', type=bool, help="MQTT Discovery for Home Assistant")
+parser.add_argument('-D', '--discovery', dest='discovery', type=str, help="Home Assistant discovery Topic")
 args = parser.parse_args()
 
 try:
@@ -80,7 +81,7 @@ if args.time_between:
 if args.log_level:
     config['log_level'] = args.log_level
 if args.discovery:
-    config['discovery_topic'] = args.discovery
+    config['discovery_topic'] = args.discovery_topic
     config['discovery'] = True
     print("Discovery activated")
 else:
