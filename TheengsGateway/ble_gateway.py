@@ -27,7 +27,6 @@ import json
 import struct
 import sys
 import logging
-from typing_extensions import Self
 
 from bleak import BleakScanner
 from ._decoder import decodeBLE, getProperties, getAttribute
