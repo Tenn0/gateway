@@ -34,7 +34,9 @@ default_config = {
     "ble_time_between_scans":5,
     "publish_topic": "homeassistant/sensor/TheengsGateway",
     "subscribe_topic": "home/TheengsGateway/commands",
-    "log_level": "WARNING"
+    "log_level": "WARNING",
+    "discovery": False,
+    "discovery_topic": "homeassistant/sensor/TheengsGateway" 
 }
 
 conf_path = os.path.expanduser('~') + '/theengsgw.conf'
@@ -50,6 +52,7 @@ parser.add_argument('-sd', '--scan_duration', dest='scan_dur', type=int, help="B
 parser.add_argument('-tb', '--time_between', dest='time_between', type=int, help="Seconds to wait between scans")
 parser.add_argument('-ll', '--log_level', dest='log_level', type=str, help="TheengsGateway log level",
                     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
+parser.add_argument('-D', '--discovery-topic', dest='discovery', type=str, help="MQTT Discovery Topic for Home Assistant. If not used, Discovery is disabled")
 args = parser.parse_args()
 
 try:
@@ -76,6 +79,11 @@ if args.time_between:
     config['ble_time_between_scans'] = args.time_between
 if args.log_level:
     config['log_level'] = args.log_level
+if args.discovery:
+    config['discovery_topic'] = args.discovery
+    config['discovery'] = True
+else:
+    config['discovery'] = False
 
 if not config['host']:
     sys.exit('Invalid MQTT host')

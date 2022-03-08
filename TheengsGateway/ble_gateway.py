@@ -38,7 +38,7 @@ class homeassistant:
         self.device = {}
         self.device['name'] = "BLEGateway"
         self.device['identifiers'] = "BLEGateway"
-        self.device['manufacturer'] = "tenn0"
+        self.device['manufacturer'] = "theengs"
 
 class gateway:
     def __init__(self, broker, port, username, password):
@@ -85,7 +85,7 @@ class gateway:
         else:
             logger.error(f"Failed to send message to topic {pub_topic}")
     
-    def publish_device_info(self, topic, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
+    def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         ha = homeassistant()
         device = {}
         ##setup HA device
@@ -93,7 +93,7 @@ class gateway:
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
-        topic = topic + "/" + pub_device_uuid
+        topic = self.discovery_topic + "/" + pub_device_uuid
         state_topic = topic + "/state"
         config_topic = topic + "/config"
         attr_topic = topic + "/attributes"
@@ -172,8 +172,8 @@ def detection_callback(device, advertisement_data):
 
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
-           print(data_json)
-           gw.publish_device_info(gw.pub_topic, data_json) ## publish sensor data to home assistant mqtt discovery
+           if gw.discovery == True:
+             gw.publish_device_info(data_json) ## publish sensor data to home assistant mqtt discovery
            
 
 
@@ -195,6 +195,8 @@ def run(arg):
     gw.time_between_scans = config.get("ble_time_between_scans", 0)
     gw.sub_topic = config.get("subscribe_topic", "gateway_sub")
     gw.pub_topic = config.get("publish_topic", "gateway_pub")
+    if config.get("discovery") == True:
+        gw.discovery_topic = config.get("discovery_topic")
     log_level = config.get("log_level", "WARNING").upper()
     if log_level == "DEBUG":
         log_level = logging.DEBUG
@@ -218,7 +220,6 @@ def run(arg):
     asyncio.run_coroutine_threadsafe(gw.ble_scan_loop(), loop)
 
     gw.connect_mqtt()
-    ##gw.publish_device_info(topic="homeassistant/sensor/TheengsGateway")
 
     try:
         gw.client.loop_forever()
