@@ -82,8 +82,10 @@ if args.log_level:
 if args.discovery:
     config['discovery_topic'] = args.discovery
     config['discovery'] = True
+    print("Discovery activated")
 else:
     config['discovery'] = False
+    print("Discovery disabled")
 
 if not config['host']:
     sys.exit('Invalid MQTT host')
