@@ -26,7 +26,6 @@ import json
 import struct
 import sys
 import logging
-from tkinter.ttk import setup_master
 
 from bleak import BleakScanner
 from ._decoder import decodeBLE, getProperties, getAttribute
