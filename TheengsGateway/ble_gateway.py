@@ -116,13 +116,11 @@ class gateway:
         attributes['model'] = pub_device['model']
         attributes['model_id'] = pub_device['model_id']
         attributes = json.dumps(attributes)
-        device['attributes'] = attributes
+        self.publish(attributes, attr_topic)
         payload = json.dumps(device)
         msg = payload
         print(topic)
         self.publish(msg, config_topic) ##overall device
-        return 1;
-
 
     async def ble_scan_loop(self):
         scanner = BleakScanner()
@@ -171,7 +169,7 @@ def detection_callback(device, advertisement_data):
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
            print(data_json)
-           gw.publish_device_info("homeassistant/sensor/TheengsGateway", data_json)
+           gw.publish_device_info(gw.pub_topic, data_json)
            
 
 
