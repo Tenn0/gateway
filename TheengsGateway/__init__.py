@@ -81,8 +81,8 @@ if args.time_between:
 if args.log_level:
     config['log_level'] = args.log_level
 if args.discovery:
-    if not args.discovery:
-        config['discovery_topi'] = default_config['discovery_topic']
+    if not args.discovery_topic:
+        config['discovery_topic'] = default_config['discovery_topic']
     else:
         config['discovery_topic'] = args.discovery_topic
     config['discovery'] = True
