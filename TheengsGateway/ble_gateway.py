@@ -110,7 +110,8 @@ class gateway:
         payload = json.dumps(device)
         msg = payload
         print(topic)
-        self.publish(msg, config_topic)
+        self.publish(msg, config_topic) ##overall device
+        self.publish(msg, state_topic) ## sensor states (hopefully)
         return 1;
 
 
