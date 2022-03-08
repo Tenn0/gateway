@@ -81,21 +81,24 @@ if args.time_between:
 if args.log_level:
     config['log_level'] = args.log_level
 if args.discovery:
+    print("discovery arg given")
     if not args.discovery_topic:
         config['discovery_topic'] = default_config['discovery_topic']
     else:
         config['discovery_topic'] = args.discovery_topic
     config['discovery'] = True
     print("Discovery activated")
-else:
-    config['discovery'] = False
-    print("Discovery disabled")
+
 if not args.discovery:
+    print("discovery arg not given")
+    print(config['discovery'])
     if config['discovery'] == True:
        config['discovery'] = True
+       print("Discovery enabled")
     else: 
       if config['discovery'] == False:
          config['discovery'] = False
+         print("Discovery disabled")
       else: config['discovery'] = default_config['discovery']
             
 
