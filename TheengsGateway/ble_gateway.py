@@ -33,6 +33,12 @@ from paho.mqtt import client as mqtt_client
 from threading import Thread
 
 logger = logging.getLogger('BLEGateway')
+class homeassistant:
+    def __init__(self) -> None:
+        self.device = {}
+        self.device['name'] = "BLEGateway"
+        self.device['identifiers'] = "BLEGateway"
+        self.device['manufacturer'] = "tenn0"
 
 class gateway:
     def __init__(self, broker, port, username, password):
@@ -79,11 +85,25 @@ class gateway:
         else:
             logger.error(f"Failed to send message to topic {pub_topic}")
     
-    def publish_device_info(self, pub_topic, device):
-        topic = pub_topic + "/" + device
+    def publish_device_info(self, topic, pub_device):
+        ha = homeassistant()
+        device = {}
+        pub_device_uuid = pub_device['id'].replace(":", "")
+        device['unique_id'] = pub_device['id']
+        topic = topic + "/" + pub_device_uuid
+        state_topic = topic + "/state"
+        config_topic = topic + "/config"
+        device['name'] = device['name']
+        device['state_topic'] = state_topic
+        device['device'] = ha.device
+        device['schema'] = "json"
+        device['state_topic'] = state_topic
+        device['state'] = pub_device['rssi'] 
+        device['unit_of_meas'] = "steps"
+        payload = json.dumps(device)
+        msg = payload
         print(topic)
-        msg = "hi"
-        self.publish(msg, topic)
+        self.publish(msg, config_topic)
         return 1;
 
 
@@ -134,7 +154,8 @@ def detection_callback(device, advertisement_data):
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
            print(data_json)
-
+           gw.publish_device_info("homeassistant/sensor/TheengsGateway", data_json)
+           
 
 
 def run(arg):
@@ -178,7 +199,7 @@ def run(arg):
     asyncio.run_coroutine_threadsafe(gw.ble_scan_loop(), loop)
 
     gw.connect_mqtt()
-    gw.publish_device_info(device = "hi", pub_topic=gw.pub_topic)
+    ##gw.publish_device_info(topic="homeassistant/sensor/TheengsGateway")
 
     try:
         gw.client.loop_forever()
