@@ -97,8 +97,10 @@ class gateway:
         topic = topic + "/" + pub_device_uuid
         state_topic = topic + "/state"
         config_topic = topic + "/config"
-        if pub_device['name']:
+        if 'name' in pub_device:
           device['name'] = pub_device['name']
+        else: 
+            device['name'] = "null"
         device['state_topic'] = state_topic
         device['device'] = ha.device
         device['schema'] = "json"
