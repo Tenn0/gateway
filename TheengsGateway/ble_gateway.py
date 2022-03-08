@@ -26,6 +26,7 @@ import json
 import struct
 import sys
 import logging
+from tkinter.ttk import setup_master
 
 from bleak import BleakScanner
 from ._decoder import decodeBLE, getProperties, getAttribute
@@ -105,8 +106,9 @@ class gateway:
         device['device'] = ha.device
         device['schema'] = "json"
         device['state_topic'] = state_topic
-        device['state'] = pub_device['rssi'] 
-        device['unit_of_meas'] = "steps"
+        if 'steps' in pub_device:
+            device['state'] = "steps"
+            device['unit_of_meas'] = "steps"
         payload = json.dumps(device)
         msg = payload
         print(topic)
