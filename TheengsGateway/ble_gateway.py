@@ -107,13 +107,14 @@ class gateway:
         device['schema'] = "json"
         device['state_topic'] = state_topic
         if 'steps' in pub_device:
-            device['state'] = "steps"
-            device['unit_of_meas'] = "steps"
+          msg = {}
+          msg['state'] = pub_device['steps']
+          msg = json.dumps(msg)
+          self.publish(msg, state_topic) ## sensor states (hopefully)
         payload = json.dumps(device)
         msg = payload
         print(topic)
         self.publish(msg, config_topic) ##overall device
-        self.publish(msg, state_topic) ## sensor states (hopefully)
         return 1;
 
 
