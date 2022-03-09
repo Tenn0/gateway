@@ -98,10 +98,10 @@ if args.discovery:
             config['discovery'] = "true"
             print("Discovery activated")
           if not args.discovery_device_name:
-            if not config['discovery_device_name']:
+            if not 'discovery_device_name' in config.keys:
              config['discovery_device_name'] = default_config['discovery_device_name']
           
-          if config['discovery_device_name']:
+          if 'discovery_device_name' in config.keys:
              config['discovery_device_name'] = config['discovery_device_name']
 
 else:
