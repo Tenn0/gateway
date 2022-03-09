@@ -142,6 +142,7 @@ def run(arg):
         raise SystemExit(f"Invalid File: {sys.argv[1]}")
 
     try:
+        print(config['discovery'])
         if config['discovery'] == "true":
             from ._discovery import discovery
             gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
