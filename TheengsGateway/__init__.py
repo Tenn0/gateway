@@ -88,20 +88,21 @@ if args.discovery:
     if args.discovery == "false":
         print("Discovery disabled")
         config['discovery'] = "false"
-    else:    
-      if not args.discovery_topic:
-        config['discovery_topic'] = default_config['discovery_topic']
-      else:
-        config['discovery_topic'] = args.discovery_topic
-   # if args.discovery == False:
-        config['discovery'] = "true"
-
-        print("Discovery activated")
-      if not args.discovery_device_name:
+    else:
+        if args.discovery == "true":
+            config['discovery'] = "true"
         
-        if not config['discovery_device_name']:
+        if not args.discovery_topic:
+          config['discovery_topic'] = default_config['discovery_topic']
+        else:
+          config['discovery_topic'] = args.discovery_topic
+          config['discovery'] = "true"
+          print("Discovery activated")
+        if not args.discovery_device_name:
+        
+          if not config['discovery_device_name']:
              config['discovery_device_name'] = default_config['discovery_device_name']
-        if config['discovery_device_name']:
+          if config['discovery_device_name']:
              config['discovery_device_name'] = config['discovery_device_name']
 
 if not args.discovery:
