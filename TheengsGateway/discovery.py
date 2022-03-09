@@ -8,7 +8,8 @@ from ._ble_gateway import gateway
 
 
 class discovery(gateway):
-
+    def __init__(self, discovery):
+        self.discovery = discovery
         
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery

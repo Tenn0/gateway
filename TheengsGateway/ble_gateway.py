@@ -127,7 +127,7 @@ def detection_callback(device, advertisement_data):
 
         if data_json:
            gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
-           if gw.discovery == True:
+           if config['discovery'] == True:
              gw.publish_device_info(data_json) ## publish sensor data to home assistant mqtt discovery
            
 
@@ -144,9 +144,10 @@ def run(arg):
     try:
         if config['discovery'] == True:
             from ._discovery import discovery
+            print("imported discovery")
             gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
         else:
-          gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"])
+            gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"])
     except:
         raise SystemExit(f"Missing or invalid MQTT host parameters")
 
