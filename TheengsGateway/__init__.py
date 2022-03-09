@@ -98,11 +98,11 @@ if args.discovery:
 
         print("Discovery activated")
       if not args.discovery_device_name:
+        
+        if not config['discovery_device_name']:
+             config['discovery_device_name'] = default_config['discovery_device_name']
         if config['discovery_device_name']:
              config['discovery_device_name'] = config['discovery_device_name']
-        if not config['discovery_device_name']:
-             sys.exit("Discovery Device Name not given, but Discovery")
-    
 
 if not args.discovery:
     print("discovery arg not given")
