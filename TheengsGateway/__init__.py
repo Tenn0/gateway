@@ -55,7 +55,7 @@ parser.add_argument('-ll', '--log_level', dest='log_level', type=str, help="Thee
                     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
 parser.add_argument('-Dt', '--discovery-topic', dest='discovery_topic', type=bool, help="MQTT Discovery for Home Assistant")
 parser.add_argument('-D', '--discovery', dest='discovery', type=str, help="Home Assistant discovery Topic")
-parser.add_argument('-dm', '--discovery_name', dest='device_name', type=str, help="Device name for Home Assistant")
+parser.add_argument('-dm', '--discovery_name', dest='discovery_device_name', type=str, help="Device name for Home Assistant")
 args = parser.parse_args()
 
 try:
@@ -84,27 +84,35 @@ if args.log_level:
     config['log_level'] = args.log_level
 if args.discovery:
     print("discovery arg given")
-    if not args.discovery_topic:
+    print(args.discovery)
+    if args.discovery == "false":
+        print("Discovery disabled")
+        config['discovery'] = "false"
+    else:    
+      if not args.discovery_topic:
         config['discovery_topic'] = default_config['discovery_topic']
-    else:
+      else:
         config['discovery_topic'] = args.discovery_topic
-    config['discovery'] = True
-    print("Discovery activated")
-    if not args.device_name:
-        if config['device_name']:
-            config['device_name'] = config['device_name']
-        if not config['device_name']:
-            sys.exit("Discovery Device Name not given, but Discovery activated.")
+   # if args.discovery == False:
+        config['discovery'] = "true"
+
+        print("Discovery activated")
+      if not args.discovery_device_name:
+        if config['discovery_device_name']:
+             config['discovery_device_name'] = config['discovery_device_name']
+        if not config['discovery_device_name']:
+             sys.exit("Discovery Device Name not given, but Discovery")
+    
 
 if not args.discovery:
     print("discovery arg not given")
     print(config['discovery'])
-    if config['discovery'] == True:
-       config['discovery'] = True
+    if config['discovery'] == "true":
+       config['discovery'] = "true"
        print("Discovery enabled")
     else: 
-      if config['discovery'] == False:
-         config['discovery'] = False
+      if config['discovery'] == "false":
+         config['discovery'] = "false"
          print("Discovery disabled")
       else: config['discovery'] = default_config['discovery']
             
