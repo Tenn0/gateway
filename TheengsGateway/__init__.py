@@ -32,11 +32,12 @@ default_config = {
     "pass":"",
     "ble_scan_time":5,
     "ble_time_between_scans":5,
-    "publish_topic": "homeassistant/sensor/TheengsGateway",
+    "publish_topic": "home/TheengsGateway/BTtoMQTT",
     "subscribe_topic": "home/TheengsGateway/commands",
     "log_level": "WARNING",
     "discovery": False,
-    "discovery_topic": "homeassistant/sensor/TheengsGateway" 
+    "discovery_topic": "homeassistant/sensor",
+    "discovery_device_name": "BLEGateway" 
 }
 
 conf_path = os.path.expanduser('~') + '/theengsgw.conf'
@@ -54,6 +55,7 @@ parser.add_argument('-ll', '--log_level', dest='log_level', type=str, help="Thee
                     choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
 parser.add_argument('-Dt', '--discovery-topic', dest='discovery_topic', type=bool, help="MQTT Discovery for Home Assistant")
 parser.add_argument('-D', '--discovery', dest='discovery', type=str, help="Home Assistant discovery Topic")
+parser.add_argument('-dm', '--discovery_name', dest='device_name', type=str, help="Device name for Home Assistant")
 args = parser.parse_args()
 
 try:
@@ -88,6 +90,11 @@ if args.discovery:
         config['discovery_topic'] = args.discovery_topic
     config['discovery'] = True
     print("Discovery activated")
+    if not args.device_name:
+        if config['device_name']:
+            config['device_name'] = config['device_name']
+        if not config['device_name']:
+            sys.exit("Discovery Device Name not given, but Discovery activated.")
 
 if not args.discovery:
     print("discovery arg not given")
