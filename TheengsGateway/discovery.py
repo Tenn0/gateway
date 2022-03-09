@@ -13,7 +13,8 @@ class discovery(gateway):
         self.port = port
         self.username = username
         self.password = password
-        self.discovery = discovery 
+        self.discovery = discovery
+        self.stopped = False
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         device = {}
