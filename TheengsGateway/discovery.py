@@ -8,9 +8,12 @@ from ._ble_gateway import gateway
 
 
 class discovery(gateway):
-    def __init__(self, discovery):
-        self.discovery = discovery
-        
+    def __init__(self, broker, port, username, password, discovery):
+        self.broker = broker
+        self.port = port
+        self.username = username
+        self.password = password
+        self.discovery = discovery 
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         device = {}
