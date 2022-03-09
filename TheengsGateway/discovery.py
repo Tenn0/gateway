@@ -4,19 +4,19 @@ import json
 import struct
 import sys
 import logging
-
-from .ble_gateway import gateway
+from ._ble_gateway import gateway
 
 
 class discovery(gateway):
-    def __init__(self) -> None:
-        self.device = {}
-        self.device['name'] = "BLEGateway"
-        self.device['identifiers'] = "BLEGateway"
-        self.device['manufacturer'] = "theengs"
+
+        
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
-        ha = self.device
+        device = {}
+        device['name'] = "BLEGateway"
+        device['identifiers'] = "BLEGateway"
+        device['manufacturer'] = "theengs"
+        ha = device
         device = {}
         ##setup HA device
         pub_device = json.loads(pub_device)

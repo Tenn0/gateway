@@ -31,18 +31,16 @@ from bleak import BleakScanner
 from ._decoder import decodeBLE, getProperties, getAttribute
 from paho.mqtt import client as mqtt_client
 from threading import Thread
-from .discovery import discovery as dc
 
 logger = logging.getLogger('BLEGateway')
 
 class gateway:
-    def __init__(self, broker, port, username, password, discovery):
+    def __init__(self, broker, port, username, password):
         self.broker = broker
         self.port = port
         self.username = username
         self.password = password
         self.stopped = False
-        self.discovery = discovery
 
     def connect_mqtt(self):
         def on_connect(client, userdata, flags, rc):
@@ -144,7 +142,11 @@ def run(arg):
         raise SystemExit(f"Invalid File: {sys.argv[1]}")
 
     try:
-        gw = dc(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
+        if config['discovery'] == True:
+            from ._discovery import discovery
+            gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
+        else:
+          gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"])
     except:
         raise SystemExit(f"Missing or invalid MQTT host parameters")
 
