@@ -100,10 +100,11 @@ if args.discovery:
           if not args.discovery_device_name:
             if not config['discovery_device_name']:
              config['discovery_device_name'] = default_config['discovery_device_name']
+          
           if config['discovery_device_name']:
              config['discovery_device_name'] = config['discovery_device_name']
 
-if not args.discovery:
+else:
     print("discovery arg not given")
     print(config['discovery'])
     if config['discovery'] == "true":
