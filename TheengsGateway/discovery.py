@@ -16,7 +16,7 @@ class discovery(gateway):
     def connect_mqtt(self):
         super().connect_mqtt()
     
-    def publish(self, msg, pub_topic=None):
+    def publish(self, msg, pub_topic):
         return super().publish(msg, pub_topic)
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
