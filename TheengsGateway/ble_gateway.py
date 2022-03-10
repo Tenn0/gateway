@@ -144,7 +144,7 @@ def run(arg):
         print("lol")
         from .discovery import discovery
         print("inheriting class")
-        gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], True)
+        gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], True, config['discovery_topic'])
         #except:
         #  raise SystemExit(f"Missing or invalid MQTT host parameters")
     else:
@@ -173,9 +173,9 @@ def run(arg):
 
     logging.basicConfig()
     logger.setLevel(log_level)
-    if config.get("discovery") == True:
-      gw.discovery_topic = config.get("discovery_topic")
-      logger.info("HA Discovery activated")
+#    if config.get("discovery") == True:
+#      gw.discovery_topic = config.get("discovery_topic")
+#      logger.info("HA Discovery activated")
     loop = asyncio.get_event_loop()
     t = Thread(target=loop.run_forever, daemon=True)
     t.start()

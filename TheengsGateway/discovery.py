@@ -8,9 +8,10 @@ from .ble_gateway import gateway
 
 
 class discovery(gateway):
-    def __init__(self, broker, port, username, password, discovery):
+    def __init__(self, broker, port, username, password, discovery, discovery_topic):
       super().__init__(broker, port, username, password)
       self.discovery = discovery
+      self.discovery_topic = discovery_topic
 
     def connect_mqtt(self):
         
