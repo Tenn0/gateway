@@ -40,9 +40,9 @@ def returnValues(device):
       print(properties)
       properties = json.loads(properties)
       print(f"lol {properties}")
-      properties = properties['properties']
+      #properties = properties['properties']
       print(f"properties: {properties}")
-      print(getAttribute(device, 'properties: steps'))
+      print(getAttribute(device, properties['steps']))
       for p in properties.keys():
          print(f"{p} is the key")
          print(getAttribute(device, p))
