@@ -129,7 +129,7 @@ def detection_callback(device, advertisement_data):
           print(data_json)
           print(gw.discovery)
           try:
-            if gw.discovery == True:
+            if gw.discovery == "true":
                 print("publish device#")
                 gw.publish_device_info(data_json) ## publish sensor data to home assistant mqtt discovery
           except: 
