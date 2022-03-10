@@ -6,10 +6,12 @@ import sys
 import logging
 
 from bleak import BleakScanner
-from ._decoder import decodeBLE, getProperties, getAttribute
+from threading import Thread
+from decoder import decodeBLE, getProperties, getAttribute
 
 class test:
 
+  
   async def ble_scan_loop(self):
           scanner = BleakScanner()
           scanner.register_detection_callback(detection_callback)
@@ -30,7 +32,7 @@ class test:
 #        logger.error('BLE scan loop stopped')
           running = False
 
-  def detection_callback(device, advertisement_data):
+def detection_callback(device, advertisement_data):
   #    logger.debug("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
        data_json = {}
 
@@ -59,3 +61,38 @@ class test:
           data = getProperties(dev['model_id'])
           print(data.keys)
           print(device.keys())
+
+def run(arg):
+    global gw
+    
+    gw = test()
+    
+
+    gw.scan_time = 5
+    gw.time_between_scans = 5
+    gw.sub_topic = ay_sub")
+    gw.pub_topic = config.get("publish_topic", "gateway_pub")
+ 
+    loop = asyncio.get_event_loop()
+    t = Thread(target=loop.run_forever, daemon=True)
+    t.start()
+    asyncio.run_coroutine_threadsafe(gw.ble_scan_loop(), loop)
+
+    gw.connect_mqtt()
+
+    try:
+        gw.client.loop_forever()
+    except(KeyboardInterrupt, SystemExit):
+        gw.client.disconnect()
+        gw.stopped = True
+        while gw.running:
+            pass
+        loop.call_soon_threadsafe(loop.stop)
+        t.join()
+    
+if __name__ == '__main__':
+    try:
+        arg = sys.argv[1]
+    except IndexError:
+        raise SystemExit(f"Usage: {sys.argv[0]} /path/to/config_file")
+    run(arg)
