@@ -42,7 +42,7 @@ def returnValues(device):
       print(f"lol {properties}")
       properties = properties['properties']
       print(f"properties: {properties}")
-      print(getAttribute(device, 'steps-count'))
+      print(getAttribute(device, 'step-count'))
       for p in properties.keys():
          print(p)
          print(getAttribute(device, p))
