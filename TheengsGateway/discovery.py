@@ -41,7 +41,7 @@ class discovery(gateway):
         else: 
             device['name'] = pub_device_uuid
         device['state_topic'] = state_topic
-        device['device'] = ha.device
+        device['device'] = ha
         device['schema'] = "json"
         device['state_topic'] = state_topic
         if 'steps' in pub_device:  ## sensor states for Xaomi Mi Band
