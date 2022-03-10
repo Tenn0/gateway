@@ -75,6 +75,7 @@ def detection_callback(device, advertisement_data):
              dev = json.loads(data_json)
              if dev['model_id'] == "MiBand":
                data = getProperties(dev['model_id'])
+               print(data)
                data = json.loads(data)
                data = data['properties']
             #print(data.keys())
