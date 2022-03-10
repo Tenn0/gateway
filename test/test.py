@@ -42,8 +42,9 @@ def returnValues(device):
       print(f"properties: {properties}")
       print(getAttribute(device, 'steps'))
       for p in properties.keys():
-         getAttribute(device, p)
          print(p)
+         print(getAttribute(device, p))
+         
 
 def detection_callback(device, advertisement_data):
   #    logger.debug("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
