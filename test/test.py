@@ -70,8 +70,6 @@ def run(arg):
 
     gw.scan_time = 5
     gw.time_between_scans = 5
-    gw.sub_topic = ay_sub")
-    gw.pub_topic = config.get("publish_topic", "gateway_pub")
  
     loop = asyncio.get_event_loop()
     t = Thread(target=loop.run_forever, daemon=True)
