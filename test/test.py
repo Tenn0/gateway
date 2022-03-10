@@ -31,6 +31,12 @@ class test:
     
 #        logger.error('BLE scan loop stopped')
           running = False
+def returnValues(device):
+      properties = {}
+      device = json.loads(device)
+      device = device['model_id']
+      properties = getProperties(device)
+      print(properties)
 
 def detection_callback(device, advertisement_data):
   #    logger.debug("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
@@ -62,7 +68,9 @@ def detection_callback(device, advertisement_data):
           data = json.loads(data)
           data = data['properties']
           print(data.keys())
-          print(dev.keys())  
+          data = getAttribute()
+          print(dev.keys())
+          returnValues(data_json)  
 
 async def main():
     scanner = BleakScanner()
