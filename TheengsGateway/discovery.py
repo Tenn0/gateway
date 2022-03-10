@@ -20,7 +20,7 @@ class discovery(gateway):
         return super().publish(msg, pub_topic)
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
-        print("publishing device {pub_device}")
+        print(f"publishing device `{pub_device}`")
         device = {}
         device['name'] = "BLEGateway"
         device['identifiers'] = "BLEGateway"
