@@ -144,7 +144,7 @@ def run(arg):
         print("lol")
         from .discovery import discovery
         print("inheriting class")
-        gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], True, config['discovery_topic'])
+        gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], config['discovery'], config['discovery_topic'])
         #except:
         #  raise SystemExit(f"Missing or invalid MQTT host parameters")
     else:
