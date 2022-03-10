@@ -67,12 +67,13 @@ def detection_callback(device, advertisement_data):
        if data_json:
           print(data_json)
           dev = json.loads(data_json)
-          data = getProperties(dev['model_id'])
-          data = json.loads(data)
-          data = data['properties']
-          print(data.keys())
-          print(dev.keys())
-          returnValues(data_json)  
+          if dev['model_id'] == "MiBand":
+            data = getProperties(dev['model_id'])
+            data = json.loads(data)
+            data = data['properties']
+            #print(data.keys())
+            #print(dev.keys())
+            returnValues(data_json)  
 
 async def main():
     scanner = BleakScanner()
