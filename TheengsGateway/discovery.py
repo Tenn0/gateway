@@ -44,9 +44,8 @@ class discovery(gateway):
         device['device'] = ha
         device['schema'] = "json"
         device['state_topic'] = state_topic
-        if 'steps' in pub_device:  ## sensor states for Xaomi Mi Band
-          msg = pub_device['steps']
-          self.publish(msg, state_topic) 
+        msg = pub_device['properties']
+        self.publish(msg, state_topic) 
         
         ##attributes
         attributes = {}      
@@ -55,6 +54,7 @@ class discovery(gateway):
         attributes['id'] = pub_device['id']
         attributes['model'] = pub_device['model']
         attributes['model_id'] = pub_device['model_id']
+        attributes['unit_of_meas'] = pub_device['attributes']
         attributes = json.dumps(attributes)
         device['json_attr_t'] = attr_topic
         self.publish(attributes, attr_topic) ##attributes
