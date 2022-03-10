@@ -44,7 +44,7 @@ def returnValues(device):
       print(f"properties: {properties['properties'].keys()}")
       print(f"properties: {properties['properties'].values()}")
       print(getAttribute(device, 'steps'))
-      for p in properties.keys():
+      for p in properties['properties'].keys():
          print(f"{p} is the key")
          print(getAttribute(device, p))
          
