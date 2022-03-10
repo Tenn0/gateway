@@ -7,7 +7,7 @@ import logging
 
 from bleak import BleakScanner
 from threading import Thread
-from decoder import decodeBLE, getProperties, getAttribute
+from TheengsDecoder import decodeBLE, getProperties, getAttribute
 
 class test:
 
