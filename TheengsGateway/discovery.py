@@ -12,11 +12,6 @@ class discovery(gateway):
       super().__init__(broker, port, username, password)
       self.discovery = discovery
       self.discovery_topic = discovery_topic
-
-    def connect_mqtt(self):
-        
-        super(discovery, self). connect_mqtt()
-        print("child class")
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         device = {}
