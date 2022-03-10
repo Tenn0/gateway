@@ -75,18 +75,6 @@ def run(arg):
     t = Thread(target=loop.run_forever, daemon=True)
     t.start()
     asyncio.run_coroutine_threadsafe(gw.ble_scan_loop(), loop)
-
-    gw.connect_mqtt()
-
-    try:
-        gw.client.loop_forever()
-    except(KeyboardInterrupt, SystemExit):
-        gw.client.disconnect()
-        gw.stopped = True
-        while gw.running:
-            pass
-        loop.call_soon_threadsafe(loop.stop)
-        t.join()
     
 if __name__ == '__main__':
     try:
