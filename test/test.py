@@ -59,8 +59,7 @@ def detection_callback(device, advertisement_data):
           print(data_json)
           dev = json.loads(data_json)
           data = getProperties(dev['model_id'])
-          print(data)
-          print(device.keys())
+          print(type(data))
 
 
 async def main():
