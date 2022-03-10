@@ -60,7 +60,7 @@ def detection_callback(device, advertisement_data):
           dev = json.loads(data_json)
           data = getProperties(dev['model_id'])
           print(type(data))
-
+          print(dev.keys())  
 
 async def main():
     scanner = BleakScanner()
