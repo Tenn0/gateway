@@ -38,6 +38,7 @@ def returnValues(device):
       device = device['model_id']
       properties = getProperties(device)
       properties = json.loads(properties)
+      print(f"lol {properties}")
       properties = properties['properties']
       print(f"properties: {properties}")
       print(getAttribute(device, 'steps'))
