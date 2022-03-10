@@ -44,7 +44,7 @@ def returnValues(device):
       print(f"properties: {properties}")
       print(getAttribute(device, 'step-count'))
       for p in properties.keys():
-         print(p)
+         print(f"{p} is the key")
          print(getAttribute(device, p))
          
 
