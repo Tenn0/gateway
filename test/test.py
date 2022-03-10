@@ -36,6 +36,7 @@ def returnValues(device):
       device = json.loads(device)
       device = device['model_id']
       properties = getProperties(device)
+      properties = json.loads(properties)
       properties = properties['properties']
       print(properties)
 
