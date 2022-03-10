@@ -62,23 +62,15 @@ def detection_callback(device, advertisement_data):
           print(data.keys)
           print(device.keys())
 
-def run(arg):
-    global gw
-    
-    gw = test()
-    
 
-    gw.scan_time = 5
-    gw.time_between_scans = 5
- 
-    loop = asyncio.get_event_loop()
-    t = Thread(target=loop.run_forever, daemon=True)
-    t.start()
-    asyncio.run_coroutine_threadsafe(gw.ble_scan_loop(), loop)
-    
-if __name__ == '__main__':
-    try:
-        arg = sys.argv[1]
-    except IndexError:
-        raise SystemExit(f"Usage: {sys.argv[0]} /path/to/config_file")
-    run(arg)
+async def main():
+    scanner = BleakScanner()
+    scanner.register_detection_callback(detection_callback)
+    await scanner.start()
+    await asyncio.sleep(5.0)
+    await scanner.stop()
+
+    for d in scanner.discovered_devices:
+        print(d)
+
+asyncio.run(main())
