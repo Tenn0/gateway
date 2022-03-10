@@ -70,16 +70,16 @@ def detection_callback(device, advertisement_data):
           data_json['rssi'] = device.rssi
           data_json = decodeBLE(json.dumps(data_json))
 
-       if data_json:
-          print(data_json)
-          dev = json.loads(data_json)
-          if dev['model_id'] == "MiBand":
-            data = getProperties(dev['model_id'])
-            data = json.loads(data)
-            data = data['properties']
+          if data_json:
+             print(data_json)
+             dev = json.loads(data_json)
+             if dev['model_id'] == "MiBand":
+               data = getProperties(dev['model_id'])
+               data = json.loads(data)
+               data = data['properties']
             #print(data.keys())
             #print(dev.keys())
-            returnValues(data_json)  
+               returnValues(data_json)  
 
 async def main():
     scanner = BleakScanner()
