@@ -140,16 +140,18 @@ def run(arg):
             config = json.load(config_file)
     except:
         raise SystemExit(f"Invalid File: {sys.argv[1]}")
-
-    try:
-        print(config['discovery'])
-        if config['discovery'] == "true":
-            from ._discovery import discovery
-            gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"], config["discovery"])
-        else:
+    if config['discovery'] == "true":
+        print("lol")
+        from .discovery import discovery
+        print("inheriting class")
+        gw = discovery(config["host"], int(config["port"]), config["user"], config["pass"])
+        #except:
+        #  raise SystemExit(f"Missing or invalid MQTT host parameters")
+    else:
+        try:
           gw = gateway(config["host"], int(config["port"]), config["user"], config["pass"])
-    except:
-        raise SystemExit(f"Missing or invalid MQTT host parameters")
+        except:
+          raise SystemExit(f"Missing or invalid MQTT host parameters")
 
     gw.scan_time = config.get("ble_scan_time", 5)
     gw.time_between_scans = config.get("ble_time_between_scans", 0)

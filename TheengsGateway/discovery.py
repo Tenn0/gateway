@@ -4,17 +4,17 @@ import json
 import struct
 import sys
 import logging
-from ._ble_gateway import gateway
+from .ble_gateway import gateway
 
 
 class discovery(gateway):
-    def __init__(self, broker, port, username, password, discovery):
-        self.broker = broker
-        self.port = port
-        self.username = username
-        self.password = password
-        self.discovery = discovery
-        self.stopped = False
+    def __init__(self, broker, port, username, password):
+      super().__init__(broker, port, username, password)
+
+    def connect_mqtt(self):
+        
+        super(discovery, self). connect_mqtt()
+        print("child class")
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         device = {}
