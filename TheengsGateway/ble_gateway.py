@@ -126,7 +126,9 @@ def detection_callback(device, advertisement_data):
         data_json = decodeBLE(json.dumps(data_json))
 
         if data_json:
-          print(data_json.keys())
+          print(data_json)
+          data = json.loads(data_json)
+          print(data.keys)
           print(gw.discovery)
           if gw.discovery == "true":
                 print("publish device#")
