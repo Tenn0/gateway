@@ -38,7 +38,7 @@ def returnValues(device):
       properties = getProperties(device)
       properties = json.loads(properties)
       properties = properties['properties']
-      print(properties)
+      print(f"properties: {properties}")
 
 def detection_callback(device, advertisement_data):
   #    logger.debug("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
