@@ -80,8 +80,8 @@ def detection_callback(device, advertisement_data):
                print(data)
                data = json.loads(data)
                data = data['properties']
-               print(dev.keys())
-               print(getAttribute(dev['model_id'], 'steps'))
+               print(f"keys: {dev.keys()}")
+               print(f"attributes: {getAttribute(dev['model_id'], 'steps')}")
             #print(data.keys())
             #print(dev.keys())
                returnValues(data_json)  
