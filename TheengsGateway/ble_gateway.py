@@ -127,6 +127,7 @@ def detection_callback(device, advertisement_data):
 
         if data_json:
           print(data_json)
+          print(gw.discovery)
           try:
             if gw.discovery == True:
                 print("publish device#")
