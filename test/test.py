@@ -34,6 +34,7 @@ class test:
 def returnValues(device):
       properties = {}
       device = json.loads(device)
+      print(device['model_id'])
       device = device['model_id']
       properties = getProperties(device)
       properties = json.loads(properties)
