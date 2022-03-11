@@ -28,7 +28,7 @@ import sys
 import logging
 
 from bleak import BleakScanner
-from ._decoder import decodeBLE, getProperties, getAttribute
+from TheengsDecoder import decodeBLE, getProperties, getAttribute
 from paho.mqtt import client as mqtt_client
 from threading import Thread
 
@@ -132,6 +132,7 @@ def detection_callback(device, advertisement_data):
           print(gw.discovery)
           if gw.discovery == "true":
                 print("publish device#")
+
                 gw.publish_device_info(data_json) ## publish sensor data to home assistant mqtt discovery
           else: 
                 gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))

@@ -5,7 +5,7 @@ import struct
 import sys
 import logging
 from .ble_gateway import gateway
-
+from TheengsDecoder import getProperties, getAttribute
 
 class discovery(gateway):
     def __init__(self, broker, port, username, password, discovery, discovery_topic):
@@ -63,3 +63,10 @@ class discovery(gateway):
         payload = json.dumps(device)
         msg = payload
         self.publish(msg, config_topic) ##overall device
+
+    def returnValues(self, device):
+      properties = {}
+      device = json.loads(device)
+      device = device['model_id']
+      properties = getProperties(device)
+      print(properties)
