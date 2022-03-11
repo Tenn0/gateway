@@ -83,7 +83,7 @@ def detection_callback(device, advertisement_data):
                print(data.values())
             #print(data.keys())
             #print(dev.keys())
-               returnValues(data_json)  
+              # returnValues(data_json)  
 
 async def main():
     scanner = BleakScanner()
