@@ -72,7 +72,7 @@ def detection_callback(device, advertisement_data):
           data_json['rssi'] = device.rssi
           print(f"json_manual{data_json}")
           data_json = decodeBLE(json.dumps(data_json))
-          printf(f"jason automatic?: {data_json}")
+          print(f"jason automatic?: {data_json}")
 
           if data_json:
              print(f"jsondata: {data_json}")
