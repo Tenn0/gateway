@@ -50,7 +50,7 @@ def returnValues(device):
          
 
 def detection_callback(device, advertisement_data):
-  #    logger.debug("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
+       print("%s RSSI:%d %s" % (device.address, device.rssi, advertisement_data))
        data_json = {}
 
        if advertisement_data.service_data:
