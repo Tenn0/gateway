@@ -48,22 +48,7 @@ class discovery(gateway):
           
           print(f"p: {p}")
           print(pub_device['properties'])
-          device['unique_id'] = pub_device['id'] + p
-
-          device['name'] = hadevice['name'] + p
-          device['state_topic'] = state_topic
-          device['device'] = ha
-          device['schema'] = "json"
-          device['state_topic'] = state_topic
-          data = getProperties(pub_device['model_id'])
-          data = json.loads(data)
-          data = data['properties']  ##attributes
-          attributes = {}      
-          attributes['rssi'] = pub_device['rssi']
-          attributes['brand'] = pub_device['brand']
-          attributes['id'] = pub_device['id']
-          attributes['model'] = pub_device['model']
-          attributes['model_id'] = pub_device['model_id']
+          
         
           attributes = json.dumps(attributes)
           device['json_attr_t'] = attr_topic
@@ -72,6 +57,22 @@ class discovery(gateway):
           for k in data.keys():
                   print(data)
                   print(f"k: {k}, type: {type(k)}")
+                  device['unique_id'] = pub_device['id'] + p
+
+                  device['name'] = hadevice['name'] + p
+                  device['state_topic'] = state_topic
+                  device['device'] = ha
+                  device['schema'] = "json"
+                  device['state_topic'] = state_topic
+                  data = getProperties(pub_device['model_id'])
+                  data = json.loads(data)
+                  data = data['properties']  ##attributes
+                  attributes = {}      
+                  attributes['rssi'] = pub_device['rssi']
+                  attributes['brand'] = pub_device['brand']
+                  attributes['id'] = pub_device['id']
+                  attributes['model'] = pub_device['model']
+                  attributes['model_id'] = pub_device['model_id']
                   state_topic = topic + p +"/state"
                   config_topic = topic + p + "/config"
                   attr_topic = topic + p + "/attributes"#k = json.loads(k)
