@@ -78,7 +78,7 @@ class discovery(gateway):
                     print(f"property: {k}: {pub_device[k]} {k}")
                   #attributes['unit_of_meas'] = pub_device['attributes']
                     msg = pub_device[k]
-                    print(state_topic)
+                    print(config_topic)
                     self.publish(msg, state_topic) 
                     self.publish(attributes, attr_topic) ##attribute
                     payload = json.dumps(device)
