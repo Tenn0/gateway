@@ -50,9 +50,7 @@ class discovery(gateway):
           print(pub_device['properties'])
           
         
-          attributes = json.dumps(attributes)
-          device['json_attr_t'] = attr_topic
-          
+         
           print(data.keys())
           for k in data.keys():
                   print(data)
@@ -76,7 +74,9 @@ class discovery(gateway):
                   state_topic = topic + p +"/state"
                   config_topic = topic + p + "/config"
                   attr_topic = topic + p + "/attributes"#k = json.loads(k)
-                  if k in pub_device:
+                  attributes = json.dumps(attributes)
+                  device['json_attr_t'] = attr_topic
+          if k in pub_device:
                   #if k['name']:
                     print(f"property: {k}: {pub_device[k]} {k}")
                   #attributes['unit_of_meas'] = pub_device['attributes']
