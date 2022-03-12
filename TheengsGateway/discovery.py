@@ -40,7 +40,7 @@ class discovery(gateway):
 
         #setup entities:
         for p in pub_device['properties']:
-          print(p)
+          print(f"p: {p}")
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
