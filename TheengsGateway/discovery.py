@@ -49,7 +49,17 @@ class discovery(gateway):
         device['state_topic'] = state_topic
         data = getProperties(pub_device['model_id'])
         data = json.loads(data)
-        data = data['properties']
+        data = data['properties']  ##attributes
+        attributes = {}      
+        attributes['rssi'] = pub_device['rssi']
+        attributes['brand'] = pub_device['brand']
+        attributes['id'] = pub_device['id']
+        attributes['model'] = pub_device['model']
+        attributes['model_id'] = pub_device['model_id']
+        
+        attributes = json.dumps(attributes)
+        device['json_attr_t'] = attr_topic
+        self.publish(attributes, attr_topic) ##attributes
         print(data.keys())
         for k in data.keys():
                   print(data)
@@ -58,29 +68,13 @@ class discovery(gateway):
 
                   #if k['name']:
                   print(f"property: {k}: {pub_device[k]} {k}")
+                  #attributes['unit_of_meas'] = pub_device['attributes']
                   msg = pub_device[k]
                   self.publish(msg, state_topic) 
         
-        ##attributes
-        attributes = {}      
-        attributes['rssi'] = pub_device['rssi']
-        attributes['brand'] = pub_device['brand']
-        attributes['id'] = pub_device['id']
-        attributes['model'] = pub_device['model']
-        attributes['model_id'] = pub_device['model_id']
-        attributes['unit_of_meas'] = pub_device['attributes']
-        attributes = json.dumps(attributes)
-        device['json_attr_t'] = attr_topic
-        self.publish(attributes, attr_topic) ##attributes
+      
         
         
         payload = json.dumps(device)
         msg = payload
         self.publish(msg, config_topic) ##overall device
-
-    def returnValues(self, device):
-      properties = {}
-      device = json.loads(device)
-      device = device['model_id']
-      properties = getProperties(device)
-      print(properties)
