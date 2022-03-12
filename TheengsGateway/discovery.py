@@ -56,8 +56,8 @@ class discovery(gateway):
                   print(f"k: {k}, type: {type(k)}")
                   #k = json.loads(k)
 
-                  if k['name']:
-                    print(f"property: {k}: {k}")
+                  #if k['name']:
+                  print(f"property: {k}: {k}")
         msg = pub_device['properties']
         self.publish(msg, state_topic) 
         
