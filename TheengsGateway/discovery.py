@@ -54,6 +54,7 @@ class discovery(gateway):
         for k in data.keys():
                   print(data)
                   print(k)
+                  k = json.loads(k)
 
                   if k['name']:
                     print(f"property: {k}: {pub_device[k]} {k}")
