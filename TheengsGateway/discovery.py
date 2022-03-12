@@ -46,9 +46,10 @@ class discovery(gateway):
         device['device'] = ha
         device['schema'] = "json"
         device['state_topic'] = state_topic
+        data = getProperties(pub_device['model_id'])
         for k in pub_device.keys():
                   print(k)
-                  print(f"property: {pub_device[k]['name']}: {pub_device[k]} {k}")
+                  print(f"property: {data[k]['name']}: {pub_device[k]} {k}")
         msg = pub_device['properties']
         self.publish(msg, state_topic) 
         
