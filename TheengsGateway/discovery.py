@@ -37,7 +37,7 @@ class discovery(gateway):
         
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
-        device['unique_id'] = pub_device['id']
+        
         topic = self.discovery_topic + "/" + pub_device_uuid + "/"
 
         #setup entities:
@@ -45,6 +45,7 @@ class discovery(gateway):
           
           print(f"p: {p}")
           print(pub_device['properties'])
+          device['unique_id'] = pub_device['id'] + p
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
@@ -75,8 +76,8 @@ class discovery(gateway):
                   #if k['name']:
                     print(f"property: {k}: {pub_device[k]} {k}")
                   #attributes['unit_of_meas'] = pub_device['attributes']
-                  msg = pub_device[k]
-                  self.publish(msg, state_topic) 
+                    msg = pub_device[k]
+                    self.publish(msg, state_topic) 
         
       
         
