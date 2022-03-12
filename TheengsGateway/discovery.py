@@ -57,7 +57,7 @@ class discovery(gateway):
                   device['unique_id'] = pub_device['id'] + p
 
                   device['name'] = hadevice['name'] + p
-                  device['state_topic'] = state_topic
+                  
                   device['device'] = ha
                   device['schema'] = "json"
                   device['state_topic'] = state_topic
@@ -70,10 +70,10 @@ class discovery(gateway):
                   attributes['id'] = pub_device['id']
                   attributes['model'] = pub_device['model']
                   attributes['model_id'] = pub_device['model_id']
-
+                  device['state_topic'] = state_topic
                   attributes = json.dumps(attributes)
                   device['json_attr_t'] = attr_topic
-          if k in pub_device:
+                  if k in pub_device:
                   #if k['name']:
                     print(f"property: {k}: {pub_device[k]} {k}")
                   #attributes['unit_of_meas'] = pub_device['attributes']
