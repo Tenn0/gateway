@@ -67,7 +67,7 @@ class discovery(gateway):
         
           attributes = json.dumps(attributes)
           device['json_attr_t'] = attr_topic
-          self.publish(attributes, attr_topic) ##attributes
+          
           print(data.keys())
           for k in data.keys():
                   print(data)
@@ -81,7 +81,7 @@ class discovery(gateway):
                   #attributes['unit_of_meas'] = pub_device['attributes']
                     msg = pub_device[k]
                     self.publish(msg, state_topic) 
-        
+                    self.publish(attributes, attr_topic) ##attributes
       
         
         
