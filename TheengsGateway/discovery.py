@@ -49,6 +49,7 @@ class discovery(gateway):
         device['state_topic'] = state_topic
         data = getProperties(pub_device['model_id'])
         data = json.loads(data)
+        print(data.keys())
         for k in data.keys():
                   print(data)
                   print(k)
