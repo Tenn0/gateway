@@ -61,16 +61,16 @@ class discovery(gateway):
                   device['device'] = ha
                   device['schema'] = "json"
                   device['state_topic'] = state_topic
-                  
+                  state_topic = topic + p +"/state"
+                  config_topic = topic + p + "/config"
+                  attr_topic = topic + p + "/attributes"#k = json.loads(k)                  
                   attributes = {}      
                   attributes['rssi'] = pub_device['rssi']
                   attributes['brand'] = pub_device['brand']
                   attributes['id'] = pub_device['id']
                   attributes['model'] = pub_device['model']
                   attributes['model_id'] = pub_device['model_id']
-                  state_topic = topic + p +"/state"
-                  config_topic = topic + p + "/config"
-                  attr_topic = topic + p + "/attributes"#k = json.loads(k)
+
                   attributes = json.dumps(attributes)
                   device['json_attr_t'] = attr_topic
           if k in pub_device:
