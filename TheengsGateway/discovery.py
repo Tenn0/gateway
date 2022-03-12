@@ -23,7 +23,7 @@ class discovery(gateway):
         print(f"publishing device `{pub_device}`")
         pub_device['properties'] = json.loads(getProperties(pub_device['model_id']))
         print(type(pub_device))
-        print(pub_device.keys())
+        print(pub_device['properties'].keys())
 
         hadevice = {}
         hadevice['name'] = pub_device['name']
