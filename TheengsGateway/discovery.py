@@ -55,7 +55,7 @@ class discovery(gateway):
            print(data)
            print(f"k: {k}, type: {type(k)}")
            device['unique_id'] = pub_device['id'] + k
-           device['name'] = hadevice['name'] + k
+           device['name'] = pub_device['properties'][k]
            state_topic = topic + k +"/state"
            config_topic = topic + k + "/config"
            attr_topic = topic + k + "/attributes"#k = json.loads(k)                    
