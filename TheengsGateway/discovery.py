@@ -48,7 +48,7 @@ class discovery(gateway):
         device['schema'] = "json"
         device['state_topic'] = state_topic
         data = getProperties(pub_device['model_id'])
-        for k in pub_device.keys():
+        for k in data.keys():
                   print(k)
                   print(f"property: {data[k]['name']}: {pub_device[k]} {k}")
         msg = pub_device['properties']
