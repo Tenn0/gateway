@@ -35,7 +35,7 @@ class discovery(gateway):
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
-        topic = "lol" + "/" + pub_device_uuid
+        topic = self.discovery_topic + "/" + pub_device_uuid
         state_topic = topic + "/state"
         config_topic = topic + "/config"
         attr_topic = topic + "/attributes"
