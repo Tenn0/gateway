@@ -21,14 +21,14 @@ class discovery(gateway):
     
     def publish_device_info(self, pub_device):  ##publish sensor directly to home assistant via mqtt discovery
         print(f"publishing device `{pub_device}`")
+        pub_device = json.loads(pub_device)
         hadevice = {}
-        hadevice['name'] = "BLEGateway"
-        hadevice['identifiers'] = "BLEGateway"
-        hadevice['manufacturer'] = "theengs"
+        hadevice['name'] = pub_device['name']
+        hadevice['manufacturer'] = pub_device['brand']
         ha = hadevice
         device = {}
         ##setup HA device
-        pub_device = json.loads(pub_device)
+        
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
@@ -44,6 +44,9 @@ class discovery(gateway):
         device['device'] = ha
         device['schema'] = "json"
         device['state_topic'] = state_topic
+        for k in pub_device.keys():
+                  print(k)
+                  print(f"property: {pub_device[k]['name']}: {pub_device[k]} {k}")
         msg = pub_device['properties']
         self.publish(msg, state_topic) 
         
