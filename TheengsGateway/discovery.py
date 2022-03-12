@@ -54,7 +54,7 @@ class discovery(gateway):
         for k in data.keys():
                   print(data)
                   print(f"k: {k}, type: {type(k)}")
-                  k = json.loads(k)
+                  #k = json.loads(k)
 
                   if k['name']:
                     print(f"property: {k}: {k}")
