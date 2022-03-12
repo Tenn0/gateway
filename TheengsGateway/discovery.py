@@ -28,7 +28,7 @@ class discovery(gateway):
         print(pub_device['properties'].keys())
 
         hadevice = {}
-        if pub_device.keys().exists('name'):
+        if 'name' in pub_device:
           hadevice['name'] = pub_device['name']
         else: 
           hadevice['name'] = "lol"
