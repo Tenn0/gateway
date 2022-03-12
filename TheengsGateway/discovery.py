@@ -31,7 +31,7 @@ class discovery(gateway):
         if 'name' in pub_device:
           hadevice['name'] = pub_device['name']
         else: 
-          hadevice['name'] = "lol"
+          hadevice['name'] = pub_device['id'].replace(':', '')
         hadevice['ids'] = pub_device['id'].replace(':', '')
         hadevice['manufacturer'] = pub_device['brand']
         ha = hadevice
