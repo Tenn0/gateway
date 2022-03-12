@@ -23,7 +23,7 @@ class discovery(gateway):
         print(f"publishing device `{pub_device}`")
         pub_device = pub_device
         print(type(pub_device))
-
+        print(pub_device)
         pub_device = json.dumps(pub_device)
         print(type(pub_device))
         hadevice = {}
