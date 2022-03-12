@@ -50,6 +50,7 @@ class discovery(gateway):
         data = getProperties(pub_device['model_id'])
         data = json.loads(data)
         for k in data.keys():
+                  print(data)
                   print(k)
                   if data['name']:
                     print(f"property: {data[k]['name']}: {pub_device[k]} {k}")
