@@ -49,9 +49,7 @@ class discovery(gateway):
           print(f"p: {p}")
           print(pub_device['properties'])
           device['unique_id'] = pub_device['id'] + p
-          state_topic = topic + p +"/state"
-          config_topic = topic + p + "/config"
-          attr_topic = topic + p + "/attributes"
+
           device['name'] = hadevice['name'] + p
           device['state_topic'] = state_topic
           device['device'] = ha
@@ -74,7 +72,9 @@ class discovery(gateway):
           for k in data.keys():
                   print(data)
                   print(f"k: {k}, type: {type(k)}")
-                  #k = json.loads(k)
+                  state_topic = topic + p +"/state"
+                  config_topic = topic + p + "/config"
+                  attr_topic = topic + p + "/attributes"#k = json.loads(k)
                   if k in pub_device:
                   #if k['name']:
                     print(f"property: {k}: {pub_device[k]} {k}")
