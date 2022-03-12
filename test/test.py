@@ -84,7 +84,7 @@ def detection_callback(device, advertisement_data):
                data = data['properties']
                for k in data.keys():
                   print(k)
-                  print(f"key: {k}, value: {dev[k]} {data[k]['unit']}")
+                  print(f"property: {data[k]['name']}: {dev[k]} {k}")
                print(data.keys())
                print(data.values())
             #print(data.keys())
