@@ -28,7 +28,10 @@ class discovery(gateway):
         print(pub_device['properties'].keys())
 
         hadevice = {}
-        hadevice['name'] = pub_device['name']
+        if pub_device.keys().exists('name'):
+          hadevice['name'] = pub_device['name']
+        else: 
+          hadevice['name'] = "lol"
         hadevice['ids'] = pub_device['id'].replace(':', '')
         hadevice['manufacturer'] = pub_device['brand']
         ha = hadevice
@@ -49,7 +52,7 @@ class discovery(gateway):
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
-          device['name'] = pub_device['name'] + "_" + device['unique_id'] + "_" + p
+          device['name'] = pub_device['name'] + p
           device['state_topic'] = state_topic
           device['device'] = ha
           device['schema'] = "json"
