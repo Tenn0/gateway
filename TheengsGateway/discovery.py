@@ -57,9 +57,9 @@ class discovery(gateway):
                   device['unique_id'] = pub_device['id'] + p
 
                   device['name'] = hadevice['name'] + p
-                  state_topic = topic + p +"/state"
-                  config_topic = topic + p + "/config"
-                  attr_topic = topic + p + "/attributes"#k = json.loads(k)                    
+                  state_topic = topic + k +"/state"
+                  config_topic = topic + k + "/config"
+                  attr_topic = topic + k + "/attributes"#k = json.loads(k)                    
                   device['device'] = ha
                   device['schema'] = "json"
                   device['state_topic'] = state_topic
