@@ -126,14 +126,15 @@ def detection_callback(device, advertisement_data):
         data_json = decodeBLE(json.dumps(data_json))
 
         if data_json:
-          print(type(data_json))
-         # data_json = json.dumps(data_json)
-          print(gw.discovery)
-          if gw.discovery == "true":
+            data_json = json.loads(data_json)
+            print(type(data_json))
+         #  data_json = json.dumps(data_json)
+            print(gw.discovery)
+            if gw.discovery == "true":
                 print("publish device#")
 
                 gw.publish_device_info(data_json) ## publish sensor data to home assistant mqtt discovery
-          else: 
+            else: 
                 gw.publish(data_json, gw.pub_topic + '/' + device.address.replace(':', ''))
            
 
