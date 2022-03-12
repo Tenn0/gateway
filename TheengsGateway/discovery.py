@@ -47,10 +47,7 @@ class discovery(gateway):
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
-          if 'name' in pub_device:
-            device['name'] = pub_device['name']
-          else: 
-            device['name'] = pub_device_uuid
+          device['name'] = pub_device['name'] + "_" + device['unique_id'] + "_" + p
           device['state_topic'] = state_topic
           device['device'] = ha
           device['schema'] = "json"
