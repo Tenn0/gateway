@@ -47,7 +47,10 @@ class discovery(gateway):
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
-          device['name'] = pub_device['name'] + "_" + device['unique_id'] + "_" + p
+          if 'name' in pub_device:
+            device['name'] = pub_device['name']
+          else: 
+            device['name'] = pub_device_uuid
           device['state_topic'] = state_topic
           device['device'] = ha
           device['schema'] = "json"
@@ -72,7 +75,7 @@ class discovery(gateway):
                   #k = json.loads(k)
 
                   #if k['name']:
-                  print(f"property: {k}: {pub_device[k]} {k[]}")
+                  print(f"property: {k}: {pub_device[k]} {k}")
                   #attributes['unit_of_meas'] = pub_device['attributes']
                   msg = pub_device[k]
                   self.publish(msg, state_topic) 
