@@ -56,7 +56,7 @@ class discovery(gateway):
                   print(k)
 
                   if k['name']:
-                    print(f"property: {k['name']}: {pub_device[k]} {k}")
+                    print(f"property: {k}: {pub_device[k]} {k}")
         msg = pub_device['properties']
         self.publish(msg, state_topic) 
         
