@@ -40,9 +40,9 @@ class discovery(gateway):
 
         #setup entities:
         for p in pub_device['properties']:
-          state_topic = topic + "/state"
-          config_topic = topic + "/config"
-          attr_topic = topic + "/attributes"
+          state_topic = topic + p +"/state"
+          config_topic = topic + p + "/config"
+          attr_topic = topic + p + "/attributes"
           if 'name' in pub_device:
             device['name'] = pub_device['name']
           else: 
