@@ -36,7 +36,7 @@ class discovery(gateway):
         pub_device_uuid = pub_device['id']
         pub_device_uuid = pub_device_uuid.replace(':', '')
         device['unique_id'] = pub_device['id']
-        topic = self.discovery_topic + "/" + pub_device_uuid
+        topic = self.discovery_topic + "/" + pub_device_uuid + "/"
 
         #setup entities:
         for p in pub_device['properties']:
