@@ -24,8 +24,6 @@ class discovery(gateway):
         pub_device = pub_device
         print(type(pub_device))
         print(pub_device)
-        pub_device = json.dumps(pub_device)
-        print(type(pub_device))
         hadevice = {}
         hadevice['name'] = pub_device['name']
         hadevice['manufacturer'] = pub_device['brand']
