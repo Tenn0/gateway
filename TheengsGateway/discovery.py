@@ -48,10 +48,9 @@ class discovery(gateway):
           
           print(f"p: {p}")
           print(pub_device['properties'])
-          
-        
-         
-          print(data.keys())
+          data = getProperties(pub_device['model_id'])
+          data = json.loads(data)
+          data = data['properties']  ##attributes  
           for k in data.keys():
                   print(data)
                   print(f"k: {k}, type: {type(k)}")
@@ -62,9 +61,7 @@ class discovery(gateway):
                   device['device'] = ha
                   device['schema'] = "json"
                   device['state_topic'] = state_topic
-                  data = getProperties(pub_device['model_id'])
-                  data = json.loads(data)
-                  data = data['properties']  ##attributes
+                  
                   attributes = {}      
                   attributes['rssi'] = pub_device['rssi']
                   attributes['brand'] = pub_device['brand']
