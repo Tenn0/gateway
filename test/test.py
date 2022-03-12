@@ -82,6 +82,7 @@ def detection_callback(device, advertisement_data):
                print(data)
                data = json.loads(data)
                for k in data.keys():
+                  print(k)
                   print(f"key: {k}, value: {dev[k]}")
                print(data.keys())
                print(data.values())
