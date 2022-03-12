@@ -80,10 +80,7 @@ class discovery(gateway):
                     msg = pub_device[k]
                     print(state_topic)
                     self.publish(msg, state_topic) 
-                    self.publish(attributes, attr_topic) ##attributes
-      
-        
-        
-          payload = json.dumps(device)
-          msg = payload
-          self.publish(msg, config_topic) ##overall device
+                    self.publish(attributes, attr_topic) ##attribute
+                    payload = json.dumps(device)
+                    msg = payload
+                    self.publish(msg, config_topic) ##overall device
