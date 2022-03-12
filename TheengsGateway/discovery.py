@@ -52,7 +52,7 @@ class discovery(gateway):
           state_topic = topic + p +"/state"
           config_topic = topic + p + "/config"
           attr_topic = topic + p + "/attributes"
-          device['name'] = pub_device['name'] + p
+          device['name'] = hadevice['name'] + p
           device['state_topic'] = state_topic
           device['device'] = ha
           device['schema'] = "json"
