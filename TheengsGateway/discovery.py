@@ -54,7 +54,7 @@ class discovery(gateway):
           for k in data.keys():
                   print(data)
                   print(f"k: {k}, type: {type(k)}")
-                  device['unique_id'] = pub_device['id'] + p
+                  device['unique_id'] = pub_device['id'] + k
 
                   device['name'] = hadevice['name'] + k
                   state_topic = topic + k +"/state"
