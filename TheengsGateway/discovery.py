@@ -23,7 +23,8 @@ class discovery(gateway):
         print(f"publishing device `{pub_device}`")
         pub_device = pub_device
         print(type(pub_device))
-        print(pub_device)
+        print(pub_device.keys())
+
         hadevice = {}
         hadevice['name'] = pub_device['name']
         hadevice['manufacturer'] = pub_device['brand']
