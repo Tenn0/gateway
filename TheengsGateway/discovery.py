@@ -27,6 +27,7 @@ class discovery(gateway):
 
         hadevice = {}
         hadevice['name'] = pub_device['name']
+        hadevice['ids'] = pub_device['id'].replace(':', '')
         hadevice['manufacturer'] = pub_device['brand']
         ha = hadevice
         device = {}
